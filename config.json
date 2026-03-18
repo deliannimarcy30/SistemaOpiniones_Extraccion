@@ -1,0 +1,37 @@
+{
+  "etl": {
+    "nombre": "ETL_Opiniones",
+    "version": "1.0.0"
+  },
+  "fuentes": {
+    "csv": {
+      "activa": true,
+      "encoding": "utf-8",
+      "separador": ",",
+      "columnas_requeridas": [
+        "IdOpinion", "IdCliente", "IdProducto",
+        "Fecha", "Comentario", "Clasificacion",
+        "PuntajeSatisfaccion", "Fuente"
+      ]
+    },
+    "base_de_datos": {
+      "activa": true,
+      "driver": "ODBC Driver 17 for SQL Server",
+      "query": "SELECT IdComentario, IdCliente, IdProducto, IdFuente, IdFecha, IdSentimiento, Puntaje, Comentario FROM FactComentarios"
+    },
+    "api": {
+      "activa": true,
+      "max_reintentos": 3,
+      "limite_registros": 500
+    }
+  },
+  "staging": {
+    "formato": "parquet",
+    "carpeta": "staging"
+  },
+  "logs": {
+    "nivel": "INFO",
+    "carpeta": "logs",
+    "archivo": "etl_worker.log"
+  }
+}
